@@ -55,8 +55,9 @@ print(f"Created {len(documents)} chunks.")
 print("Creating Gemini embeddings...")
 
 embeddings = GoogleGenerativeAIEmbeddings(
-    model="gemini-embedding-2",
+    model="gemini-embedding-2-preview",
     google_api_key=api_key,
+    vertexai=False,
     output_dimensionality=768
 )
 
@@ -75,6 +76,7 @@ print("Creating Chroma database...")
 db = Chroma.from_documents(
     documents=documents,
     embedding=embeddings,
+    collection_name="digital_twin_resume",
     persist_directory=chroma_path
 )
 
